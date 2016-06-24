@@ -1,23 +1,30 @@
 #include "DigitalWatch.h"
+#include "WatchStopped.h"
 
-typedef struct DigitalWatchStateStruct * DigitalWatchState;
-typedef struct DigitalWatchStateStruct
-{
-    char * name;
-} DigitalWatchStateStruct;
-
-typedef struct DigitalWatchStruct
-{
-    DigitalWatchStateStruct state;
-} DigitalWatchStruct;
-
+// This is currently implemented as a single-instance module.
 static DigitalWatchStruct watchStruct;
 static DigitalWatch watch;
+
+static void defaultStop(DigitalWatch self)
+{
+}
+
+static void defaultStart(DigitalWatch self)
+{
+}
+
+void setWatchToDefaultState(DigitalWatch self)
+{
+    DigitalWatchState state = &self->state;
+    state->stopWatch = defaultStop;
+    state->startWatch = defaultStart;
+}
 
 DigitalWatch DigitalWatch_Create(void)
 {
     watch = &watchStruct;
-    watch->state.name = "Stopped";
+    setWatchToDefaultState(watch);
+    WatchStopped_TransitionToStopped(watch);
     return watch;
 }
 
@@ -40,7 +47,7 @@ void DigitalWatch_StopWatch(DigitalWatch self)
     {
         return;
     }
-    self->state.name = "Stopped";
+    self->state.stopWatch(self);
 }
 
 void DigitalWatch_StartWatch(DigitalWatch self)
@@ -49,5 +56,5 @@ void DigitalWatch_StartWatch(DigitalWatch self)
     {
         return;
     }
-    self->state.name = "Started";
+    self->state.startWatch(self);
 }

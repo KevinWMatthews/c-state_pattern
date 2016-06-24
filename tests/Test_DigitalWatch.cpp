@@ -24,7 +24,6 @@ TEST_GROUP(DigitalWatch)
 
 TEST(DigitalWatch, it_is_stopped_after_create)
 {
-    DigitalWatch_StopWatch(watch);
     STRCMP_EQUAL( "Stopped", DigitalWatch_GetStateName(watch) );
 }
 
@@ -37,6 +36,13 @@ TEST(DigitalWatch, it_can_be_started)
 TEST(DigitalWatch, it_can_be_stopped)
 {
     DigitalWatch_StartWatch(watch);
+    DigitalWatch_StopWatch(watch);
+    STRCMP_EQUAL( "Stopped", DigitalWatch_GetStateName(watch) );
+}
+
+TEST(DigitalWatch, stopping_twice_does_not_change_state)
+{
+    DigitalWatch_StopWatch(watch);
     DigitalWatch_StopWatch(watch);
     STRCMP_EQUAL( "Stopped", DigitalWatch_GetStateName(watch) );
 }

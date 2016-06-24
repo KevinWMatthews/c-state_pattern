@@ -10,4 +10,6 @@ char * DigitalWatch_GetStateName(DigitalWatch);
 void DigitalWatch_StopWatch(DigitalWatch);
 void DigitalWatch_StartWatch(DigitalWatch);
 
+#include "DigitalWatchPrivate.h"
+
 #endif
