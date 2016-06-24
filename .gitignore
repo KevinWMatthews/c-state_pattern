@@ -1,0 +1,13 @@
+# Ignore build results
+obj/
+build/
+
+# Ignore vim swap files
+*.swp
+*.swo
+
+# Ignore Sublime Text workspace files
+*.sublime-workspace
+
+# Ignore Konqueror folder settings files
+.directory
