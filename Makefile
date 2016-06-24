@@ -124,9 +124,9 @@ endif
 ###########
 # Targets #
 ###########
-.PHONY: test clean full_clean clear
+.PHONY: test tst clean full_clean clear
 
-test: clear $(TARGET)
+test tst: clear $(TARGET)
 	@echo Executing unit tests for: $(TARGET)
 	$(IGNORE_ERROR)$(SILENCE)./$(TARGET) -c
 
