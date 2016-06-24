@@ -22,14 +22,36 @@ TEST_GROUP(DigitalWatch)
     }
 };
 
-TEST(DigitalWatch, it_can_be_stopped)
+TEST(DigitalWatch, it_is_stopped_after_create)
 {
     DigitalWatch_StopWatch(watch);
-    STRCMP_EQUAL( "Stopped", DigitalWatch_GetState(watch) );
+    STRCMP_EQUAL( "Stopped", DigitalWatch_GetStateName(watch) );
 }
 
-IGNORE_TEST(DigitalWatch, it_can_be_started)
+TEST(DigitalWatch, it_can_be_started)
 {
     DigitalWatch_StartWatch(watch);
-    STRCMP_EQUAL( "Started", DigitalWatch_GetState(watch) );
+    STRCMP_EQUAL( "Started", DigitalWatch_GetStateName(watch) );
+}
+
+TEST(DigitalWatch, it_can_be_stopped)
+{
+    DigitalWatch_StartWatch(watch);
+    DigitalWatch_StopWatch(watch);
+    STRCMP_EQUAL( "Stopped", DigitalWatch_GetStateName(watch) );
+}
+
+TEST(DigitalWatch, GetStateName_can_handle_null_pointer)
+{
+    STRCMP_EQUAL( "Null digital watch", DigitalWatch_GetStateName(NULL) );
+}
+
+TEST(DigitalWatch, StartWatch_can_handle_null_pointer)
+{
+    DigitalWatch_StartWatch(NULL);
+}
+
+TEST(DigitalWatch, StopWatch_can_handle_null_pointer)
+{
+    DigitalWatch_StopWatch(NULL);
 }

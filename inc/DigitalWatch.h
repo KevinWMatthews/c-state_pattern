@@ -6,7 +6,7 @@ typedef struct DigitalWatchStruct * DigitalWatch;
 DigitalWatch DigitalWatch_Create(void);
 void DigitalWatch_Destroy(DigitalWatch);
 
-char * DigitalWatch_GetState(DigitalWatch);
+char * DigitalWatch_GetStateName(DigitalWatch);
 void DigitalWatch_StopWatch(DigitalWatch);
 void DigitalWatch_StartWatch(DigitalWatch);
 
