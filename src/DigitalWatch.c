@@ -1,8 +1,14 @@
 #include "DigitalWatch.h"
 
+typedef struct DigitalWatchStateStruct * DigitalWatchState;
+typedef struct DigitalWatchStateStruct
+{
+    char * name;
+} DigitalWatchStateStruct;
+
 typedef struct DigitalWatchStruct
 {
-    char * state_name;
+    DigitalWatchStateStruct state;
 } DigitalWatchStruct;
 
 static DigitalWatchStruct watchStruct;
@@ -11,7 +17,7 @@ static DigitalWatch watch;
 DigitalWatch DigitalWatch_Create(void)
 {
     watch = &watchStruct;
-    watch->state_name = "Stopped";
+    watch->state.name = "Stopped";
     return watch;
 }
 
@@ -25,7 +31,7 @@ char * DigitalWatch_GetStateName(DigitalWatch self)
     {
         return "Null digital watch";
     }
-    return self->state_name;
+    return self->state.name;
 }
 
 void DigitalWatch_StopWatch(DigitalWatch self)
@@ -34,7 +40,7 @@ void DigitalWatch_StopWatch(DigitalWatch self)
     {
         return;
     }
-    self->state_name = "Stopped";
+    self->state.name = "Stopped";
 }
 
 void DigitalWatch_StartWatch(DigitalWatch self)
@@ -43,5 +49,5 @@ void DigitalWatch_StartWatch(DigitalWatch self)
     {
         return;
     }
-    self->state_name = "Started";
+    self->state.name = "Started";
 }
